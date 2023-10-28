@@ -219,7 +219,7 @@ const AppMapBox = ({selectedOption}) => {
                 for (const layer of droneLayers) {
                     map.setLayoutProperty(layer.id, 'visibility', 'visible');
                 }
-            }, 100)
+            }, 200)
         } else {
             const map = mapRef.current;
             const droneLayers = map.getStyle().layers.filter(layer => layer.id.startsWith('white_drone_'));
@@ -362,7 +362,7 @@ const AppMapBox = ({selectedOption}) => {
                 for (const layer of droneLayers) {
                     map.setLayoutProperty(layer.id, 'visibility', 'visible');
                 }
-            }, 100)
+            }, 200)
         } else {
             const map = mapRef.current;
             const droneLayers = map.getStyle().layers.filter(layer => layer.id.startsWith('black_drone_'));
