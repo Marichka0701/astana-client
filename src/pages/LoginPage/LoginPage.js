@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import axios from "axios";
 
+import logo from '../../constants/images/miniSidebar/abu-dabi.svg';
 import styles from './LoginPage.module.scss'
+import {authService} from "../../services/auth.service";
 
 const LoginPage = () => {
     const [data, setData] = useState({ username: "", password: "" });
@@ -15,18 +16,10 @@ const LoginPage = () => {
         e.preventDefault();
 
         try {
-            const url = "http://localhost:5000/api/auth";
-            const { data: res } = await axios.post(url, data);
-            localStorage.setItem("token", res.data);
-            window.location = "/";
-        } catch (error) {
-            if (
-                error.response &&
-                error.response.status >= 400 &&
-                error.response.status <= 500
-            ) {
-                setError(error.response.data.message);
-            }
+            await authService.login(data);
+        }
+        catch (error) {
+            setError(error.message);
         }
     };
 
@@ -34,6 +27,8 @@ const LoginPage = () => {
         <div className={styles.loginPage_wrapper}>
             <div className={styles.loginPage_wrapper_login}>
                 <div className={styles.loginPage_wrapper_login_title}>
+                    <img src={logo} alt="abu dabi logo"/>
+
                     <div>
                         <h1 className={styles.title}>Login to your account</h1>
                     </div>
